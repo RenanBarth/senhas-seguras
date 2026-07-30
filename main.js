@@ -57,17 +57,21 @@ function geraSenha() {
         senha = senha + alfabeto[numeroAleatorio];
     }
     campoSenha.value = senha;
-    classficaSenha();
+    classficaSenha(alfabeto.length);
 
 }
 
-function classficaSenha(){
+function classficaSenha(tamanhoAlfabeto){
+    let entropia = tamanhoSenha * Math.log2(alfabeto.length);
+    console.log(entropia);
     forcaSenha.classList.remove('fraca','media','forte');
-    if (tamanhoSenha > 11){
+    if (entropia > 57){
         forcaSenha.classList.add('forte');
-    } else if (tamanhoSenha > 5 && tamanhoSenha < 12) {
+    } else if (entropia > 35 && entropia < 57) {
         forcaSenha.classList.add('media');
-    } else if (tamanhoSenha <= 5){
+    } else if (entropia <= 35){
         forcaSenha.classList.add('fraca');
     }
+    const valorEntropia = document.querySelector('.entrtopia')
+    valorEntropia.textContent = 2**Math.floor(entropia)/(100e6*60*60*24);
 }
